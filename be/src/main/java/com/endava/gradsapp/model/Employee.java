@@ -17,11 +17,11 @@ public class Employee implements Serializable {
     private String homeAddress;
     private String imageUrl;
     @Column(nullable = false, updatable = false)
-    private Long code;
+    private String code;
 
     public Employee() {
     }
-    public Employee(Long id, String firstName, String lastName, String email, String title, String phone, String homeAddress, String imageUrl, Long code) {
+    public Employee(Long id, String firstName, String lastName, String email, String title, String phone, String homeAddress, String imageUrl, String code) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -81,13 +81,11 @@ public class Employee implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
-    public void setCode(Long code) {
+    public void setCode(String code) {
         this.code = code;
     }
-
-
 
 }
