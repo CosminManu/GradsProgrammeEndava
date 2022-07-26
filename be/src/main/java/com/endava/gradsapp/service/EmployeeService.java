@@ -1,5 +1,6 @@
 package com.endava.gradsapp.service;
 
+import com.endava.gradsapp.exceptions.EmployeeNotFoundException;
 import com.endava.gradsapp.model.Employee;
 import com.endava.gradsapp.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Service
 public class EmployeeService {
     private final EmployeeRepo employeeRepo;        //used to do CRUD op
+
     @Autowired
     public EmployeeService(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
@@ -26,14 +28,15 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeById(Long Id){
-        return employeeRepo.findEmployeesById(Id);
+        return employeeRepo.findEmployeesById(Id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee with id " + Id + " was not found"));
     }
 
     public Employee updateEmployee(Employee employee){      //PUT
         return employeeRepo.save(employee);
     }
 
-    public void deleteEnmployee(Long id){
-        employeeRepo.deleteEmployeesById(id);
+    public void deleteEmployee(Long id){
+        employeeRepo.deleteEmployeeById(id);
     }
 }
